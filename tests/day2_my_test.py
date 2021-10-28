@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from lib_end_points.authenticate import Authenticate
+from lib.authentication import Authenticate
 
 
 class CareerPortalTest(unittest.TestCase):
@@ -10,7 +10,7 @@ class CareerPortalTest(unittest.TestCase):
 
     def test_login(self):
         sess = Authenticate()
-        positions = sess.get_positions()
+        positions = sess.get_all_positions()
         json_positions = json.loads(positions.text)
 
         self.assertGreaterEqual(len(json_positions), 5)
