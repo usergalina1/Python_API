@@ -11,7 +11,8 @@ class CareerPortalTest(unittest.TestCase):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'}
 
     def test_login(self):
-        result = self.post_login()
+
+        result = self.post_login("student@example.com", "welcome")
         self.assertEqual(200, result.status_code)
 
         json_parsed = json.loads(result.text)
@@ -45,8 +46,8 @@ class CareerPortalTest(unittest.TestCase):
 
         self.assertEqual(len(json_my_positions), 6)
 
-    def post_login(self):
-        return requests.post(self.base_url + '/login', json={"email": "student@example.com", "password": "welcome"})
+    def post_login(self, email, password):
+        return requests.post(self.base_url + '/login', json={"email": email, "password": password})
 
     def post_verify_content(self, token):
         verify_header = {'Authorization': 'Bearer ' + token}
