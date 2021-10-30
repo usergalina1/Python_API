@@ -9,7 +9,10 @@ class CareerPortalTest(unittest.TestCase):
     options = [
         ('code_200', 1, 200, ''),
         ('code_400', 999, 400, 'errorMessage":"Incorrect applicationId: 999'),
-        ('code_500', "one", 500, 'ER_BAD_FIELD_ERROR')
+        ('code_500', "one", 500, 'ER_BAD_FIELD_ERROR'),
+        ('space', '', 200, 'error_message":"No Content'),
+        ('user does not exist', 9999, 400, 'error_message":"No Content'),
+        ('empty', '', 200, 'error_message":"Not Found')
     ]
 
     def setUp(self) -> None:
