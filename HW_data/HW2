@@ -1,0 +1,28 @@
+GET the list of existing candidates /candidates
+Count how many candidates returned
+POST a new candidate /candidates
+
+Look at the authenticate function for an example of how to transmit candidate data as json
+
+Check the swagger page, to find out what json data to send and what is minimum required
+https://recruit-portnov.herokuapp.com/recruit/api/v1/api-docs/#/
+
+If you POST request is successful you should receive a response with the new candidate's ID.
+Store the ID for later use
+
+GET the list of existing candidates AGAIN... /candidates
+Ensure the count is now greater than before
+
+NOW:
+Login as student@example.com and welcome
+
+Delete the candidate you created using the ID you stored
+Ensure the candidate was deleted!
+
+BONUS ROUND:
+    After creating the new candidate login as the new candidate to ensure the email/password combination works.
+    Then delete the new candidate.
+    2X BONUS ROUND(if you know loops):
+    After creating the new candidate, retrive the list of all candidates and check that one of the entries is the candidate you posted
+
+    After deleting the candidate, retrieve the list of all candidates and check that the deleted candidate is no longer included in the list
