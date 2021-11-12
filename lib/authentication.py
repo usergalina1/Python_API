@@ -19,6 +19,7 @@ class Authenticate(object):
         token = json_parsed.get('token', False)
         if token:
             self.session.headers.update({'Authorization': 'Bearer ' + token})
+
         return resp
 
     def perform_user_verification(self):
@@ -41,6 +42,9 @@ class Authenticate(object):
             "password": password
         })
 
-    def delete_candidate(self, user_id, token):
-        token = self.session.headers.update({'Authorization': 'Bearer ' + token})
-        return self.session.delete(self.base_url + '/candidates/' + str(user_id), headers=token)
+    def delete_candidate(self, user_id):
+        return self.session.delete(self.base_url + '/candidates/' + str(user_id))
+
+    def logout(self):
+        return self.session.post(self.base_url + '/logout')
+

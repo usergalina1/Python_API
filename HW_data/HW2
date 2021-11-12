@@ -20,9 +20,12 @@ Delete the candidate you created using the ID you stored
 Ensure the candidate was deleted!
 
 BONUS ROUND:
-    After creating the new candidate login as the new candidate to ensure the email/password combination works.
+    After creating the new candidate login as the new candidate to ensure the email/password
+     combination works.
     Then delete the new candidate.
     2X BONUS ROUND(if you know loops):
-    After creating the new candidate, retrive the list of all candidates and check that one of the entries is the candidate you posted
+    After creating the new candidate, retrive the list of all candidates and check that one
+    of the entries is the candidate you posted
 
-    After deleting the candidate, retrieve the list of all candidates and check that the deleted candidate is no longer included in the list
+    After deleting the candidate, retrieve the list of all candidates and check that
+    the deleted candidate is no longer included in the list
