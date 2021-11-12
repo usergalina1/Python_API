@@ -1,0 +1,14 @@
+05/23/21
+Part 1:
+Just like for homework 1, refactor the code for the create employee test which we completed in class, and move each separate api call to its own function. Thrn move all api methids to a separate module under the lib package.
+
+
+Part 2.
+Login and submit a candidate application(in UI Recruitment -> Candidates)
+
+API endpoint: /recruitment/addCandidate
+
+(Do not upload a resume - we will learn how to submit a milti-part for in class)
+
+Verify that a candidate was successfully added
+Verify that all data was added correctly.
