@@ -1,8 +1,6 @@
 import json
 import unittest
 
-import bs4
-
 from lib.authentication import Authenticate
 
 
@@ -21,12 +19,12 @@ class TestCase(unittest.TestCase):
         print(len(json_parsed))
         self.assertEqual(len(json_parsed), count)
 
-        add_candidate = sess.post_new_candidate('ABCD', 'AB', 'email@bom.com', 'newPassw')
+        add_candidate = sess.post_new_candidate('ABCD', 'AB', 'email@boms.com', 'newPassw')
 
         json_parsed = json.loads(add_candidate.text)
-        user_id = json_parsed['id']
+        user_id = json_parsed.get('id')
         print(user_id)
-        self.assertTrue(json_parsed['email'] == 'email@bom.com')
+        self.assertTrue(json_parsed['email'] == 'email@boms.com')
         self.assertTrue(json_parsed['firstName'] == 'ABCD')
         self.assertTrue(json_parsed['lastName'] == 'AB')
 
@@ -35,19 +33,52 @@ class TestCase(unittest.TestCase):
 
         self.assertGreater(len(json_parsed), count)
 
-    def test_delete_candidate(self, user_id, token ):
+    def test_login_as_new_candidate(self):
         sess = Authenticate()
+        result = sess.authenticate('email@boms.com', 'newPassw')
+        self.assertEqual(200, result.status_code)
 
-        delete_candidate = sess.delete_candidate(user_id, token)
+        json_parsed = json.loads(result.text)
+        self.assertTrue(json_parsed['authenticated'])
 
-        # # candidates = sess.get_all_candidates()
-        json_parsed = json.loads(delete_candidate.text)
-        #
-        # # self.assertLess(len(json_parsed), count)
-        self.assertFalse(json_parsed['email'] == 'email@bom.com')
-        # self.assertFalse(json_parsed['firstName'] == 'ABCD')
-        # self.assertFalse(json_parsed['lastName'] == 'AB')
-        # self.assertFalse(json_parsed['id'] == 631)
+        result = sess.logout()
+        self.assertEqual(200, result.status_code)
+        json_parsed = json.loads(result.text)
+        self.assertEqual({'authenticated': False, 'token': None}, json_parsed)
+
+    def test_create_and_delete_candidate(self):
+        sess = Authenticate()
+        result = sess.authenticate('student@example.com', 'welcome')
+        self.assertEqual(200, result.status_code)
+
+        json_parsed = json.loads(result.text)
+        self.assertTrue(json_parsed['authenticated'])
+
+        candidates = sess.get_all_candidates()
+        json_parsed = json.loads(candidates.text)
+
+        count = 0
+        for el in json_parsed:
+            count += 1
+
+        print(count)
+        print(len(json_parsed))
+        self.assertEqual(len(json_parsed), count)
+
+        add_candidate = sess.post_new_candidate('ABCD', 'AB', 'email@bosss.com', 'newPassw')
+
+        json_parsed = json.loads(add_candidate.text)
+        user_id = json_parsed.get('id')
+        print(user_id)
+        self.assertTrue(json_parsed['email'] == 'email@bosss.com')
+        self.assertTrue(json_parsed['firstName'] == 'ABCD')
+        self.assertTrue(json_parsed['lastName'] == 'AB')
+
+
+
+        delete_candidate = sess.delete_candidate(user_id)
+        self.assertEqual(204, delete_candidate.status_code)
+
 
 if __name__ == '__main__':
     unittest.main()

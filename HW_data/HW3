@@ -1,6 +1,7 @@
 05/23/21
 Part 1:
-Just like for homework 1, refactor the code for the create employee test which we completed in class, and move each separate api call to its own function. Thrn move all api methids to a separate module under the lib package.
+Just like for homework 1, refactor the code for the create employee test which we completed in class,
+ and move each separate api call to its own function. Then move all api methods to a separate module under the lib package.
 
 
 Part 2.
