@@ -78,31 +78,31 @@ class HRMTest(unittest.TestCase):
 
         self.assertEqual(str(emp_id), actual_emp_id)
 
-        def test_submit_application(self):
-            #  Step 1: get the landing page - contains login form
-            login_uri = "/auth/login"
-            resp = self.sess.get(self.url + login_uri)
+    def test_submit_application(self):
+        #  Step 1: get the landing page - contains login form
+        login_uri = "/auth/login"
+        resp = self.sess.get(self.url + login_uri)
 
-            # Step 2: extract CSRF token
-            soup = bs4.BeautifulSoup(resp.content, 'html5lib')
-            result = soup.find('input', attrs={'name': '_csrf_token'})
-            token = result['value']
+        # Step 2: extract CSRF token
+        soup = bs4.BeautifulSoup(resp.content, 'html5lib')
+        result = soup.find('input', attrs={'name': '_csrf_token'})
+        token = result['value']
 
-            authenticate_uri = '/auth/validateCredentials'
+        authenticate_uri = '/auth/validateCredentials'
 
-            # Step 3: Login by posting credentials + CSRF token
-            login_data = {
-                '_csrf_token': token,
-                'txtUsername': 'admin',
-                'txtPassword': 'password'
-            }
-            resp = self.sess.post(self.url + authenticate_uri, data=login_data)
+        # Step 3: Login by posting credentials + CSRF token
+        login_data = {
+            '_csrf_token': token,
+            'txtUsername': 'admin',
+            'txtPassword': 'password'
+        }
+        resp = self.sess.post(self.url + authenticate_uri, data=login_data)
 
-            ##################
-            #Step 4: get the add employee page - contains the Form to add employee
-            add_candidate_uri = '/recruitment/addCandidate/id'
+        ##################
+        #Step 4: get the add employee page - contains the Form to add employee
+        add_candidate_uri = '/recruitment/addCandidate/id'
 
-            resp = self.sess.get(self.url + add_candidate_uri)
+        resp = self.sess.get(self.url + add_candidate_uri)
 
 
 
